@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dimas Maycardo Sihotang - Professional Portfolio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Chosen Palette: Navy Blue (#1e3a8a), Slate Gray (#64748b), and Light Indigo accents (#e0e7ff) -->
+    <!-- Application Structure Plan: The SPA is structured as an interactive digital portfolio dashboard. It begins with an executive summary and a Radar Chart visualizing core competencies. The core experience is a tabbed "Portfolio Explorer" that breaks down his three main pillars: Technology, Data, and Leadership, allowing users to drill down into specific projects without scrolling endlessly. Finally, a certification gallery validates his continuous learning. This structure was chosen to immediately highlight his "triple-threat" skill set while keeping detailed project descriptions organized and easily accessible. -->
+    <!-- Visualization & Content Choices: 
+    1. Core Competencies -> Goal: Compare skills -> Viz: Radar Chart (Chart.js) -> Interaction: Hover to see exact values -> Justification: Best for showing balanced multi-disciplinary skills -> Method: Chart.js Canvas.
+    2. Tech Stack Usage -> Goal: Inform -> Viz: Doughnut Chart (Chart.js) -> Interaction: Hover for details -> Justification: Shows distribution of tools used in his scheduling project -> Method: Chart.js Canvas.
+    3. Data Analytics Focus -> Goal: Compare -> Viz: Horizontal Bar Chart (Chart.js) -> Interaction: Hover -> Justification: Breaks down the specific Excel skills learned in the DQLab bootcamp -> Method: Chart.js Canvas.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8fafc; /* Slate 50 */
+        color: #0f172a; /* Slate 900 */
+      }
+
+      /* Mandatory Chart Container Styling */
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 350px;
+        }
+      }
+
+      /* Custom Tab Styling */
+      .tab-btn {
+        transition: all 0.3s ease;
+      }
+      .tab-btn.active {
+        background-color: #1e3a8a; /* Navy Blue */
+        color: white;
+        border-color: #1e3a8a;
+      }
+
+      /* Utility for hiding elements */
+      .hidden-content {
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      .active-content {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased selection:bg-blue-200 selection:text-blue-900">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <div class="font-bold text-xl text-blue-900 tracking-tight"></div>
+          <div class="flex space-x-4 text-sm font-medium text-slate-600">
+            <a href="#profil" class="hover:text-blue-900 transition">Profil</a>
+            <a href="#eksperimen" class="hover:text-blue-900 transition"
+              >Pengalaman</a
+            >
+            <a href="#sertifikasi" class="hover:text-blue-900 transition"
+              >Sertifikasi</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header id="profil" class="py-16 bg-gradient-to-b from-blue-50 to-white">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+      >
+        <!-- Text Content -->
+        <div class="space-y-6">
+          <div
+            class="inline-block bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-semibold tracking-wide uppercase"
+          >
+            Portfolio Interaktif
+          </div>
+          <h1
+            class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight"
+          >
+            Dimas Maycardo Sihotang
+          </h1>
+          <h2 class="text-xl md:text-2xl text-slate-600 font-light">
+            Interconnecting
+            <span class="font-semibold text-blue-800">Technology</span>,
+            <span class="font-semibold text-blue-800">Data Analysis</span>, &
+            <span class="font-semibold text-blue-800">Leadership</span>.
+          </h2>
+          <p class="text-slate-600 leading-relaxed text-lg">
+            Mahasiswa Sistem Informasi (IPK 3.94) dengan pondasi kuat di bidang
+            komputer & jaringan. Saya menggabungkan keahlian teknis pengembangan
+            <i>front-end</i>, ketajaman analisis data, dan kepemimpinan
+            operasional komunitas untuk menciptakan solusi digital yang efisien
+            dan berdampak.
+          </p>
+
+          <!-- Contact Badges -->
+          <div class="flex flex-wrap gap-3 pt-4">
+            <span
+              class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm border border-slate-200 shadow-sm flex items-center gap-2"
+            >
+              <span>📧</span> dimasmaycardo.sihotang@gmail.com
+            </span>
+            <span
+              class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm border border-slate-200 shadow-sm flex items-center gap-2"
+            >
+              <span>📱</span> 0812-2271-2957
+            </span>
+            <a
+              href="https://github.com/Dimas-May"
+              target="_blank"
+              class="bg-slate-800 hover:bg-slate-900 text-white px-4 py-2 rounded-lg text-sm border shadow-sm transition flex items-center gap-2"
+            >
+              <span>💻</span> GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Radar Chart -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-100">
+          <h3 class="text-center font-semibold text-slate-700 mb-2">
+            Peta Kompetensi Utama
+          </h3>
+          <p class="text-center text-sm text-slate-500 mb-4">
+            Interaksi visualisasi multi-disiplin
+          </p>
+          <div class="chart-container">
+            <canvas id="skillsRadarChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content: Interactive Portfolio Explorer -->
+    <main id="eksperimen" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="text-3xl font-bold text-slate-900 mb-4">
+            Eksplorasi Pengalaman
+          </h2>
+          <p class="text-slate-600">
+            Setiap pilar mewakili pengalaman nyata yang membangun kerangka
+            berpikir profesional saya. Pilih tab di bawah ini untuk melihat
+            detail proyek, tanggung jawab, dan visualisasi data terkait.
+          </p>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="flex flex-wrap justify-center gap-4 mb-10">
+          <button
+            class="tab-btn active px-6 py-3 rounded-xl border border-blue-200 font-medium text-slate-700 hover:bg-blue-50"
+            onclick="openTab('tech')"
+          >
+            💻 Front-End & Tech
+          </button>
+          <button
+            class="tab-btn px-6 py-3 rounded-xl border border-blue-200 font-medium text-slate-700 hover:bg-blue-50"
+            onclick="openTab('data')"
+          >
+            📊 Data Analytics
+          </button>
+          <button
+            class="tab-btn px-6 py-3 rounded-xl border border-blue-200 font-medium text-slate-700 hover:bg-blue-50"
+            onclick="openTab('lead')"
+          >
+            🗣️ Leadership & Ops
+          </button>
+        </div>
+
+        <!-- Tab Content: Technology -->
+        <div id="tech" class="tab-content active-content">
+          <div
+            class="bg-slate-50 rounded-2xl p-8 border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+          >
+            <div>
+              <h3 class="text-2xl font-bold text-blue-900 mb-2">
+                Sistem Informasi Penjadwalan Kuliah
+              </h3>
+              <p
+                class="text-sm text-slate-500 mb-6 uppercase tracking-wide font-semibold"
+              >
+                Proyek Pribadi | Mei - Jun 2025
+              </p>
+              <p class="text-slate-700 mb-4">
+                Pengembangan solusi digital berbasis web untuk mengatasi
+                kompleksitas penjadwalan akademik. Fokus pada antarmuka pengguna
+                yang bersih dan logika sistem yang handal.
+              </p>
+              <ul class="space-y-3 mb-6">
+                <li class="flex items-start">
+                  <span class="text-green-600 mr-2">✅</span>
+                  <span class="text-slate-700"
+                    ><strong>Problem Solving:</strong> Mengimplementasikan
+                    validasi otomatis real-time untuk mencegah bentrok jadwal
+                    dosen & ruangan.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-600 mr-2">✅</span>
+                  <span class="text-slate-700"
+                    ><strong>User-Centric UI:</strong> Membangun halaman login,
+                    dashboard interaktif, dan modul kelola data yang
+                    responsif.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-600 mr-2">✅</span>
+                  <span class="text-slate-700"
+                    ><strong>Troubleshooting:</strong> Menerapkan pengalaman
+                    hardware/jaringan masa lalu ke dalam debugging kode web
+                    secara efisien.</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-center font-semibold text-slate-700 mb-2">
+                Distribusi Penggunaan Teknologi
+              </h4>
+              <div class="chart-container">
+                <canvas id="techChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Content: Data Analytics -->
+        <div id="data" class="tab-content hidden-content">
+          <div
+            class="bg-slate-50 rounded-2xl p-8 border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+          >
+            <div class="order-2 md:order-1">
+              <h4 class="text-center font-semibold text-slate-700 mb-2">
+                Fokus Kompetensi Excel Analitis
+              </h4>
+              <div class="chart-container">
+                <canvas id="dataChart"></canvas>
+              </div>
+            </div>
+            <div class="order-1 md:order-2">
+              <h3 class="text-2xl font-bold text-blue-900 mb-2">
+                Data Analyst with Excel
+              </h3>
+              <p
+                class="text-sm text-slate-500 mb-6 uppercase tracking-wide font-semibold"
+              >
+                Study Case Bootcamp (DQLab) | Jan 2025
+              </p>
+              <p class="text-slate-700 mb-4">
+                Memperkuat fondasi analitis melalui pengolahan data riil.
+                Kemampuan ini memungkinkan saya untuk mengambil keputusan teknis
+                dan manajerial berdasarkan metrik yang terukur, bukan sekadar
+                intuisi.
+              </p>
+              <div
+                class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm"
+              >
+                <h5 class="font-bold text-slate-800 mb-3">Kemampuan Inti:</h5>
+                <div class="grid grid-cols-2 gap-3">
+                  <div
+                    class="p-3 bg-blue-50 text-blue-900 rounded font-medium text-sm flex items-center gap-2"
+                  >
+                    <span>🧹</span> Data Cleaning
+                  </div>
+                  <div
+                    class="p-3 bg-blue-50 text-blue-900 rounded font-medium text-sm flex items-center gap-2"
+                  >
+                    <span>📈</span> Pivot Tables
+                  </div>
+                  <div
+                    class="p-3 bg-blue-50 text-blue-900 rounded font-medium text-sm flex items-center gap-2"
+                  >
+                    <span>🧮</span> Complex Logic (IF, VLOOKUP)
+                  </div>
+                  <div
+                    class="p-3 bg-blue-50 text-blue-900 rounded font-medium text-sm flex items-center gap-2"
+                  >
+                    <span>📊</span> Data Visualization
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Content: Leadership -->
+        <div id="lead" class="tab-content hidden-content">
+          <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+            <div class="max-w-3xl mx-auto">
+              <h3 class="text-2xl font-bold text-blue-900 mb-2 text-center">
+                Manajemen & Eksekusi Program
+              </h3>
+              <p class="text-center text-slate-600 mb-10">
+                Menggabungkan ketelitian kerja teknis ke dalam koordinasi
+                operasional komunitas nyata.
+              </p>
+
+              <!-- Timeline Layout -->
+              <div
+                class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent"
+              >
+                <!-- Item 1 -->
+                <div
+                  class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
+                >
+                  <div
+                    class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-blue-100 text-blue-900 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"
+                  >
+                    🎤
+                  </div>
+                  <div
+                    class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+                  >
+                    <h4 class="font-bold text-slate-800 text-lg">
+                      Program Officer - Literaku Indonesia
+                    </h4>
+                    <span class="text-sm text-blue-600 font-medium"
+                      >Mar 2025 - Jul 2025 (Batch 8)</span
+                    >
+                    <p class="text-slate-600 mt-2 text-sm">
+                      Menjadi wajah program sebagai Master of Ceremony (MC)
+                      dalam acara edukasi virtual, menjaga antusiasme audiens,
+                      dan memastikan kelancaran komunikasi antar panitia sesuai
+                      <i>rundown</i>.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div
+                  class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
+                >
+                  <div
+                    class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-blue-100 text-blue-900 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"
+                  >
+                    📝
+                  </div>
+                  <div
+                    class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+                  >
+                    <h4 class="font-bold text-slate-800 text-lg">
+                      Penyusunan Konten & Evaluasi
+                    </h4>
+                    <span class="text-sm text-blue-600 font-medium"
+                      >Literaku Indonesia</span
+                    >
+                    <p class="text-slate-600 mt-2 text-sm">
+                      Bertanggung jawab merancang materi presentasi (PPT)
+                      edukatif. Mengelola interaksi komunitas digital dan
+                      melakukan evaluasi pasca-acara untuk kontrol kualitas
+                      program.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div
+                  class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
+                >
+                  <div
+                    class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-100 text-slate-700 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"
+                  >
+                    🏐
+                  </div>
+                  <div
+                    class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+                  >
+                    <h4 class="font-bold text-slate-800 text-lg">
+                      Anggota - Volleyball Club
+                    </h4>
+                    <span class="text-sm text-slate-500 font-medium"
+                      >Nov 2024 - Sekarang</span
+                    >
+                    <p class="text-slate-600 mt-2 text-sm">
+                      Menyeimbangkan keterampilan keras (hard skills) dengan
+                      komitmen dalam olahraga tim, membangun kekompakan, dan
+                      sportivitas di lingkungan kampus.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Certifications & Learning Section -->
+    <section
+      id="sertifikasi"
+      class="py-16 bg-slate-50 border-t border-slate-200"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-slate-900 mb-4">
+            Sertifikasi & Pembelajaran Berkelanjutan
+          </h2>
+          <p class="text-slate-600 max-w-2xl mx-auto">
+            Bukti nyata dedikasi terhadap pembaruan pengetahuan dalam menghadapi
+            tantangan teknologi modern.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <!-- Cert 1 -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition"
+          >
+            <div
+              class="w-12 h-12 bg-blue-100 text-blue-700 rounded-lg flex items-center justify-center text-2xl mb-4"
+            >
+              🤖
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-1">
+              Dasar & Penggunaan Generatif AI
+            </h3>
+            <p class="text-blue-600 font-medium text-sm mb-3">
+              Codepolitan & Google.org | Jan 2026
+            </p>
+            <p class="text-slate-600 text-sm mb-4">
+              Penyelesaian 15 JP pelatihan komprehensif mencakup Prompt
+              Engineering, Alat Produktivitas AI, dan konsep Responsible AI
+              (Program AI Opportunity Fund).
+            </p>
+            <div
+              class="text-xs bg-slate-100 inline-block px-2 py-1 rounded text-slate-500"
+            >
+              ID: CPRAI-CR/2026/1/0321
+            </div>
+          </div>
+
+          <!-- Cert 2 -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition"
+          >
+            <div
+              class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-2xl mb-4"
+            >
+              📊
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-1">
+              Data Analyst with Excel
+            </h3>
+            <p class="text-emerald-600 font-medium text-sm mb-3">
+              DQLab (Xeratic, UMN) | Jan 2025
+            </p>
+            <p class="text-slate-600 text-sm mb-4">
+              Penyelesaian Bootcamp studi kasus berfokus pada teknik pembersihan
+              data, pengolahan tingkat lanjut, dan penyajian data statistik.
+            </p>
+            <div
+              class="text-xs bg-slate-100 inline-block px-2 py-1 rounded text-slate-500"
+            >
+              ID: DQLABMB4EXCUHCHNK
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center">
+      <div class="max-w-7xl mx-auto px-4">
+        <p class="mb-4">
+          "Mari berkolaborasi untuk menciptakan dampak nyata melalui teknologi
+          dan data yang terorganisir."
+        </p>
+        <div class="flex justify-center space-x-4 mb-4">
+          <a
+            href="mailto:dimasmaycardo.sihotang@gmail.com"
+            class="hover:text-white transition"
+            >Email</a
+          >
+          <span>•</span>
+          <a
+            href="https://github.com/Dimas-May"
+            target="_blank"
+            class="hover:text-white transition"
+            >GitHub</a
+          >
+        </div>
+        <p class="text-sm">
+          © 2026 Dimas Maycardo Sihotang. Interactive Portfolio.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Interactive Logic & Chart.js Config -->
+    <script>
+      // --- Tab Navigation Logic ---
+      function openTab(tabName) {
+        // Hide all contents
+        const contents = document.querySelectorAll(".tab-content");
+        contents.forEach((content) => {
+          content.classList.remove("active-content");
+          content.classList.add("hidden-content");
+        });
+
+        // Remove active state from all buttons
+        const buttons = document.querySelectorAll(".tab-btn");
+        buttons.forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Show selected content and activate button
+        document.getElementById(tabName).classList.remove("hidden-content");
+        document.getElementById(tabName).classList.add("active-content");
+        event.currentTarget.classList.add("active");
+      }
+
+      // --- Chart.js Visualizations ---
+      // Global defaults
+      Chart.defaults.font.family = "'Inter', sans-serif";
+      Chart.defaults.color = "#64748b"; // slate-500
+
+      window.onload = function () {
+        // 1. Radar Chart: Core Competencies (Header)
+        const ctxRadar = document
+          .getElementById("skillsRadarChart")
+          .getContext("2d");
+        new Chart(ctxRadar, {
+          type: "radar",
+          data: {
+            labels: [
+              "Front-End Dev",
+              "Data Analytics",
+              "Leadership",
+              "Public Speaking",
+              "Event Mgmt",
+              "Problem Solving",
+            ],
+            datasets: [
+              {
+                label: "Tingkat Keahlian (Skala 100)",
+                data: [80, 85, 90, 85, 95, 85],
+                backgroundColor: "rgba(30, 58, 138, 0.2)", // Navy with opacity
+                borderColor: "#1e3a8a",
+                pointBackgroundColor: "#1e3a8a",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: "#1e3a8a",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false, // CRITICAL for filling container
+            scales: {
+              r: {
+                angleLines: { color: "rgba(0, 0, 0, 0.05)" },
+                grid: { color: "rgba(0, 0, 0, 0.05)" },
+                pointLabels: {
+                  font: { size: 12, weight: "600" },
+                  color: "#475569",
+                },
+                ticks: { display: false, min: 0, max: 100 }, // Hide scale numbers for cleaner look
+              },
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    return " Kompetensi: " + context.raw + "%";
+                  },
+                },
+              },
+            },
+          },
+        });
+
+        // 2. Doughnut Chart: Technology (Tech Tab)
+        const ctxTech = document.getElementById("techChart").getContext("2d");
+        new Chart(ctxTech, {
+          type: "doughnut",
+          data: {
+            labels: [
+              "HTML5 (Structure)",
+              "CSS3 (Styling)",
+              "JavaScript (Logic)",
+              "PHP (Backend)",
+              "Git/Tools",
+            ],
+            datasets: [
+              {
+                data: [30, 25, 25, 10, 10],
+                backgroundColor: [
+                  "#e11d48",
+                  "#2563eb",
+                  "#f59e0b",
+                  "#7c3aed",
+                  "#475569",
+                ],
+                borderWidth: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "65%",
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: { padding: 15, boxWidth: 12 },
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    return " " + context.label + ": Porsi " + context.raw + "%";
+                  },
+                },
+              },
+            },
+          },
+        });
+
+        // 3. Horizontal Bar Chart: Data Analytics (Data Tab)
+        const ctxData = document.getElementById("dataChart").getContext("2d");
+        new Chart(ctxData, {
+          type: "bar",
+          data: {
+            labels: [
+              "Data Cleaning",
+              "Pivot Tables",
+              "Logical Formulas",
+              "Visualization",
+              "Formatting",
+            ],
+            datasets: [
+              {
+                label: "Fokus Pembelajaran (Excel)",
+                data: [90, 85, 80, 75, 70],
+                backgroundColor: "#059669", // Emerald
+                borderRadius: 4,
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y", // Makes it horizontal
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: { display: false, max: 100 },
+              y: { grid: { display: false } },
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    return " Mastery Level: " + context.raw + "%";
+                  },
+                },
+              },
+            },
+          },
+        });
+      };
+    </script>
+  </body>
+</html>
